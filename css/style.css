@@ -2,12 +2,19 @@ body{
 	font-family: 'IBM Plex Sans KR', sans-serif;
 	font-weight: 400;
 }
+.container{
 
+}
+.source{
+	text-align: center;
+	margin: 0;
+	padding: 0;
+}
 .wrapper {
 	max-width: 1060px;
 	max-height: 575px;
 	background: linear-gradient(to top, #dad4ec 0%, #dad4ec 1%, #f3e7e9 100%);
-	margin: 70px auto;
+	margin: 70px auto 5px;
 	box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.15);
 	border-radius: 50px;
 	display: flex;
