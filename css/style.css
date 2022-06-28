@@ -1,18 +1,19 @@
 body{
 	font-family: 'IBM Plex Sans KR', sans-serif;
 	font-weight: 400;
+		
 }
 .container{
-
+	font-size: 18px;
 }
 .source{
 	text-align: center;
 	margin: 0;
 	padding: 0;
+	
 }
 .wrapper {
-	max-width: 1060px;
-	max-height: 575px;
+	max-width: 960px;
 	background: linear-gradient(to top, #dad4ec 0%, #dad4ec 1%, #f3e7e9 100%);
 	margin: 70px auto 5px;
 	box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.15);
@@ -20,16 +21,18 @@ body{
 	display: flex;
 	justify-content: space-between;
 	padding: 46px 47px;
-	font-size: 24px;
-	line-height: 36px;
 	color: #343434;
 }
 
 .first-part {
-	max-width: 460px;
+	
 }
 
 #search-form{
+	display: flex;
+	justify-content: space-between;
+}
+.btn-wrapper{
 	display: flex;
 	justify-content: space-between;
 }
@@ -42,7 +45,8 @@ body{
 	border-radius: 30px;
 	padding: 0px 10px;
 	display: flex;
-	margin: 0 0 0 10px ;
+	margin-left: 10px;
+	align-items: center;
 }
 .iput-btn:hover{
 	background: #5f3ecb;
@@ -53,7 +57,7 @@ input[type="text"]{
 	background-color: #F5F5F5;
 	border-radius: 100px;
 	border:none;
-	padding: 5px 20px 5px;
+	padding: 5px 0px 5px 15px;
 	filter: drop-shadow(2px 2px 10px rgba(0, 0, 0, 0.1));
 }
 
@@ -63,18 +67,13 @@ input[type="text"]{
 	justify-content: space-between;
 	align-items: center;
 }
-.city{
-	max-width: 150px;
-}
+
 .first-icon{
 	display: flex;
 	align-items: center;
 }
-
 .icon-text{
 	margin-left: 10px;
-	display: flex;
-	align-items:center;
 }
 .day {
 	display: flex;
@@ -100,7 +99,7 @@ input[type="text"]{
 .celsius, .fahrenheit{
 	color: #F5F5F5;
 	text-decoration: none;
-	font-size: 16px;
+	font-size: 18px;
 	font-weight: normal;
 	position: relative;
 	top: -83px;
@@ -112,7 +111,7 @@ input[type="text"]{
 }
 	
 .content-weater {
-	font-size: 24px;
+	font-size: 20px;
 }
 .content-degrees {
 	display: block;
@@ -133,7 +132,6 @@ input[type="text"]{
 }
 .text-sbsc{
 	color:rgba(178, 179, 199, 0.74);
-	font-size: 20px;
 	line-height: 0;
 	margin-top: 10px;
 }
@@ -142,7 +140,6 @@ input[type="text"]{
 	border-radius:50px;
 	padding: 30px;
 	filter: drop-shadow(2px 2px 10px rgba(0, 0, 0, 0.1));
-	width: 460px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -177,16 +174,15 @@ input[type="text"]{
 .next-days {
 	display: flex;
 	justify-content: space-between;
-	max-width: 400px;
 }
 .days-block {
+	margin: 0 5px 0 5px;
 	max-width: 70px;
 	background-color:#F5F5F5;
 	border: 1px solid rgba(255, 104, 192, 0.29);
 	border-radius: 30px;
 	padding: 15px;
 	color: #343434;
-	font-size: 24px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
