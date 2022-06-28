@@ -38,11 +38,17 @@ let windSpeed = document.querySelector("#wind-id");
 let weatherStatus = document.querySelector(".content-weater");
 let temp = document.querySelector(".content-degrees");
 let currentBtn = document.querySelector("#btn-current");
+let input = document.querySelector("#search-input");
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${input.value}&appid=${apiKey}&units=${unit}`;
 
+function showDefaultCityWeather(){
+	let cityElement = document.getElementById("default-city").textContent;
+	let defaultApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityElement}&appid=${apiKey}&units=${unit}`;
+	axios.get(defaultApiUrl).then(getWeather);
+}
+showDefaultCityWeather();
 form.addEventListener("submit", (e) => {
 	e.preventDefault();
-	let input = document.querySelector("#search-input");
-	let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${input.value}&appid=${apiKey}&units=${unit}`;
 	axios.get(apiUrl).then(getWeather);
 	if(input.value) {
 		cityName.innerHTML = input.value;
