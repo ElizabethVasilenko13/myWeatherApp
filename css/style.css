@@ -177,7 +177,7 @@ input[type="text"]{
 }
 .days-block {
 	margin: 0 5px 0 5px;
-	max-width: 70px;
+	max-width: 60px;
 	background-color:#F5F5F5;
 	border: 1px solid rgba(255, 104, 192, 0.29);
 	border-radius: 30px;
