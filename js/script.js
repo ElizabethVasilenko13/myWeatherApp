@@ -65,10 +65,10 @@ function getWeather(response) {
 	
 	function changeUnit () {
 		let tempF = Math.round((tempValue * 9) / 5 + 32);
-		let tempC =  Math.round((tempF - 32) * (5 / 9));
+		
 		linkCelsius.addEventListener("click", (e) => {
 			e.preventDefault();
-			temp.innerHTML = tempC;
+			temp.innerHTML = tempValue;
 		});
 		linkFahrenheit.addEventListener("click", (e) => {
 			e.preventDefault();

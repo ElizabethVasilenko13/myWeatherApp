@@ -88,12 +88,14 @@ input[type="text"]{
 .temperature {
 	background: linear-gradient(127.04deg, #FF68C0 9.06%, #774CFE 97.79%);
 	border-radius: 30px;
-	max-width: 210px;
+	/* max-width: 350px; */
 	color: #F5F5F5;
 	margin: 0 auto;
 	font-weight: 500;
 	padding: 30px ;
 	padding-bottom: 0;
+	display: flex;
+	justify-content: space-between;
 }
 
 .celsius, .fahrenheit{
@@ -149,7 +151,7 @@ input[type="text"]{
 .fa-cloud-rain {
 	color: #F5F5F5;
 	font-size: 130px;
-	margin-left: 20px;
+	margin-left: 10px;
 }
 .future-content {
 	display: flex;
