@@ -2,8 +2,8 @@
 	let dayBlock = document.querySelector(".day");	
 	let cityName = document.querySelector(".icon-text");
 	let form = document.querySelector("#search-form");
-	let linkCelsius = document.querySelector(".celsius");
-	let linkFahrenheit = document.querySelector(".fahrenheit");
+	let linkCelsius = document.querySelector("#celsius");
+	let linkFahrenheit = document.querySelector("#fahrenheit");
 
 function showData (date){
 	let day = date.getDay();
@@ -62,21 +62,25 @@ currentBtn.addEventListener("click", e => {
 function getWeather(response) {
 	temp.innerHTML = Math.round(response.data.main.temp);
 	let tempValue = Math.round(response.data.main.temp);
+	let iconElement = document.querySelector(".icon-element");
 	
 	function changeUnit () {
-		let tempF = Math.round((tempValue * 9) / 5 + 32);
-		
 		linkCelsius.addEventListener("click", (e) => {
 			e.preventDefault();
+			linkCelsius.classList.add("active");
+			linkFahrenheit.classList.remove("active");
 			temp.innerHTML = tempValue;
 		});
 		linkFahrenheit.addEventListener("click", (e) => {
 			e.preventDefault();
-			temp.innerHTML = tempF;
+			linkFahrenheit.classList.add("active");
+			linkCelsius.classList.remove("active");
+			temp.innerHTML = Math.round((tempValue * 9) / 5 + 32);;
 		});
 	}
 	changeUnit();
-	
+	iconElement.setAttribute("src",`./img/${response.data.weather[0].icon}.svg`);
+	iconElement.classList.add("dd");
 	visibility.innerHTML = (response.data.visibility/1000) + "km";
 	humiditly.innerHTML = (response.data.main.humidity) + "%";
 	windSpeed.innerHTML = (response.data.wind.speed) + "km/h";

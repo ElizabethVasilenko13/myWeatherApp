@@ -88,7 +88,7 @@ input[type="text"]{
 .temperature {
 	background: linear-gradient(127.04deg, #FF68C0 9.06%, #774CFE 97.79%);
 	border-radius: 30px;
-	/* max-width: 350px; */
+	max-width: 270px; 
 	color: #F5F5F5;
 	margin: 0 auto;
 	font-weight: 500;
@@ -96,18 +96,30 @@ input[type="text"]{
 	padding-bottom: 0;
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 }
-
-.celsius, .fahrenheit{
-	color: #F5F5F5;
-	text-decoration: none;
-	font-size: 18px;
-	font-weight: normal;
+.icon-element{
+	filter: invert(99%) sepia(5%) saturate(492%) hue-rotate(209deg) brightness(112%) contrast(92%);
+}
+.link-degrees.active{
+	color: #343434;
+}
+.link{
 	position: relative;
 	top: -83px;
 	left: 68px;
 }
-
+.link-degrees{
+	color: #F5F5F5;
+	text-decoration: none;
+	font-size: 18px;
+	font-weight: normal;
+}
+.link-degrees:hover{
+	cursor: default;
+	text-decoration: none;
+	color: #343434;
+}
 .tempereture-content {
 	text-align: center;
 }
