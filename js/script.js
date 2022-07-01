@@ -42,6 +42,7 @@ let input = document.querySelector("#search-input");
 
 function showDefaultCityWeather(){
 	let cityElement = document.getElementById("default-city").textContent;
+	console.log(cityElement);
 	let defaultApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityElement}&appid=${apiKey}&units=${unit}`;
 	axios.get(defaultApiUrl).then(getWeather);
 }
@@ -63,7 +64,7 @@ function getWeather(response) {
 	temp.innerHTML = Math.round(response.data.main.temp);
 	let tempValue = Math.round(response.data.main.temp);
 	let iconElement = document.querySelector(".icon-element");
-	
+
 	function changeUnit () {
 		linkCelsius.addEventListener("click", (e) => {
 			e.preventDefault();
