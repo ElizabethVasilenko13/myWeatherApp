@@ -185,7 +185,7 @@ input[type="text"]{
 	color: #F5F5F5;
 	font-weight: 500;
 	}
-.next-days {
+.future-forecast-days {
 	display: flex;
 	justify-content: space-between;
 }
