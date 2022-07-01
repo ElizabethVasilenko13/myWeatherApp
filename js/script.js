@@ -59,25 +59,32 @@ currentBtn.addEventListener("click", e => {
 	e.preventDefault();
 	navigator.geolocation.getCurrentPosition(retrievePosition);
 });
-
+function getForecastDays(time){
+	let date = new Date(time * 1000);
+	let day = date.getDay();
+  	let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+		return days[day];
+  	
+}
 function getForecast(response){
 	let forecast = response.data.daily;
 	let forecastElement = document.querySelector(".future-forecast-days");
 	console.log(response);
+	let forecastHtml = ``;
 
-let forecastHtml = ``;
-
-	forecast.forEach((day, index) =>{
+	forecast.forEach((forecastDay, index) =>{
+	let AverageTemp = Math.round((Math.round(forecastDay.temp.max) + Math.round(forecastDay.temp.min))/2);
+		
 		if(index < 5){
 			forecastHtml = forecastHtml +
 			`
 			<div class="days-block">
 			<div class="block">
-			<div class="block-title">sun</div>
-				<img src="./img/${response.data.daily[index].weather[0].icon}.svg" class="weather-icon"></img>
-				<div class="block-degrees">14°</div>
-				</div>
-				</div>
+			<div class="block-title">${getForecastDays(forecastDay.dt)}</div>
+				<img src="./img/${forecastDay.weather[0].icon}.svg" class="weather-icon" width="28" height="28"></img>
+				<div class="block-degrees">${AverageTemp}°</div>
+			</div>
+			</div>
 			`;
 		}
 	
