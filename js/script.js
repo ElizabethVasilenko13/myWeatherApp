@@ -60,6 +60,40 @@ currentBtn.addEventListener("click", e => {
 	navigator.geolocation.getCurrentPosition(retrievePosition);
 });
 
+function getForecast(response){
+	let forecast = response.data.daily;
+	let forecastElement = document.querySelector(".future-forecast-days");
+	console.log(response);
+
+let forecastHtml = ``;
+
+	forecast.forEach((day, index) =>{
+		if(index < 5){
+			forecastHtml = forecastHtml +
+			`
+			<div class="days-block">
+			<div class="block">
+			<div class="block-title">sun</div>
+				<img src="./img/${response.data.daily[index].weather[0].icon}.svg" class="weather-icon"></img>
+				<div class="block-degrees">14°</div>
+				</div>
+				</div>
+			`;
+		}
+	
+	}); 
+	
+	forecastHtml = forecastHtml + `</div>`;
+	forecastElement.innerHTML = forecastHtml; 
+}
+
+function getCoord(coordinats){
+	apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinats.lat}&lon=${coordinats.lon}&appid=${apiKey}&units=metric`;
+	axios.get(apiUrl).then(getForecast);
+	console.log(apiUrl);
+}
+
+
 function getWeather(response) {
 	temp.innerHTML = Math.round(response.data.main.temp);
 	let tempValue = Math.round(response.data.main.temp);
@@ -80,6 +114,7 @@ function getWeather(response) {
 		});
 	}
 	changeUnit();
+	getCoord(response.data.coord);
 	iconElement.setAttribute("src",`./img/${response.data.weather[0].icon}.svg`);
 	iconElement.classList.add("dd");
 	visibility.innerHTML = (response.data.visibility/1000) + "km";

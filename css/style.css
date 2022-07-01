@@ -195,6 +195,11 @@ input[type="text"]{
 	display: flex;
 	justify-content: space-between;
 }
+.block{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
 .days-block {
 	margin: 0 5px 0 5px;
 	max-width: 60px;
@@ -204,7 +209,7 @@ input[type="text"]{
 	padding: 15px;
 	color: #343434;
 	display: flex;
-	flex-direction: column;
+	justify-content: space-between;
 	align-items: center;
 	box-shadow: 3px 3px 10px 1px rgba(119, 76, 254, 0.2);
 }
@@ -212,9 +217,9 @@ input[type="text"]{
 	margin-bottom: 10px;
 }
 .weather-icon {
-	background: -webkit-linear-gradient(#FF68C0 , #774CFE);
-    -webkit-background-clip: text;
+	/* filter: invert(41%) sepia(50%) saturate(2488%) hue-rotate(247deg) brightness(94%) contrast(90%); */
     -webkit-text-fill-color: transparent;
 	font-size: 28px;
 	margin-bottom: 10px;
+	filter: invert(79%) sepia(35%) saturate(6248%) hue-rotate(276deg) brightness(88%) contrast(100%);
 }
