@@ -47,6 +47,7 @@ function showDefaultCityWeather(){
 	axios.get(defaultApiUrl).then(getWeather);
 }
 
+
 form.addEventListener("submit", (e) => {
 	let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${input.value}&appid=${apiKey}&units=${unit}`;
 	e.preventDefault();
@@ -55,10 +56,14 @@ form.addEventListener("submit", (e) => {
 		cityName.innerHTML = input.value;
 	}
 });
+
+
 currentBtn.addEventListener("click", e => {
 	e.preventDefault();
 	navigator.geolocation.getCurrentPosition(retrievePosition);
 });
+
+
 function getForecastDays(time){
 	let date = new Date(time * 1000);
 	let day = date.getDay();
@@ -76,7 +81,6 @@ function getForecast(response){
 	let currentDay = getForecastDays(response.data.daily[1].dt);
 	console.log(currentDay);
 	forecast.forEach((forecastDay, index) =>{
-		console.log(forecastDay[index+1]);
 		let AverageTemp = Math.round((Math.round(forecastDay.temp.max) + Math.round(forecastDay.temp.min))/2);
 		if(index < 5){
 			forecastHtml = forecastHtml +
@@ -122,25 +126,13 @@ function getCoord(coordinats){
 }
 
 function getWeather(response) {
-	temp.innerHTML = Math.round(response.data.main.temp);
+	
 	let tempValue = Math.round(response.data.main.temp);
+	temp.innerHTML = tempValue;
 	let iconElement = document.querySelector(".icon-element");
-
-	function changeUnit () {
-		linkCelsius.addEventListener("click", (e) => {
-			e.preventDefault();
-			linkCelsius.classList.add("active");
-			linkFahrenheit.classList.remove("active");
-			temp.innerHTML = tempValue;
-		});
-		linkFahrenheit.addEventListener("click", (e) => {
-			e.preventDefault();
-			linkFahrenheit.classList.add("active");
-			linkCelsius.classList.remove("active");
-			temp.innerHTML = Math.round((tempValue * 9) / 5 + 32);;
-		});
-	}
-	changeUnit();
+	console.log(tempValue);
+	
+	changeUnit(tempValue);
 	getCoord(response.data.coord);
 	iconElement.setAttribute("src",`./img/${response.data.weather[0].icon}.svg`);
 	iconElement.classList.add("dd");
@@ -151,6 +143,21 @@ function getWeather(response) {
 	cityName.innerHTML = response.data.name;
 }
 
+function changeUnit (temperature) {
+		linkCelsius.addEventListener("click", (e) => {
+			e.preventDefault();
+			linkCelsius.classList.add("active");
+			linkFahrenheit.classList.remove("active");
+			temp.innerHTML = temperature;
+		});
+		linkFahrenheit.addEventListener("click", (e) => {
+			e.preventDefault();
+			linkFahrenheit.classList.add("active");
+			linkCelsius.classList.remove("active");
+			temp.innerHTML = Math.round((temperature * 9) / 5 + 32);
+		});
+	}
+	
 function retrievePosition(position) {
 	let lat = position.coords.latitude;
 	let lon = position.coords.longitude;

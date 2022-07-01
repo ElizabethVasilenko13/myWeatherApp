@@ -69,7 +69,6 @@ input[type="text"]{
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	
 }
 
 .first-icon{
@@ -108,23 +107,30 @@ input[type="text"]{
 	filter: invert(99%) sepia(5%) saturate(492%) hue-rotate(209deg) brightness(112%) contrast(92%);
 }
 .link-degrees.active{
-	color: #343434;
+	color: #F5F5F5;
+	background-color: #754cfe7e;
+	border-radius: 8px;
 }
 .link{
 	position: relative;
 	top: -83px;
 	left: 68px;
+	margin-left: 10px;
+	
 }
 .link-degrees{
 	color: #F5F5F5;
 	text-decoration: none;
-	font-size: 18px;
 	font-weight: normal;
+	padding: 4px;
 }
 .link-degrees:hover{
 	cursor: default;
 	text-decoration: none;
-	color: #343434;
+	color: #F5F5F5;
+	background-color: #754cfe7e;
+	border-radius: 8px;
+	transition: all 10ms ease-in-out;
 }
 .tempereture-content {
 	text-align: center;
@@ -185,13 +191,6 @@ input[type="text"]{
 	align-items: center;
 }
 
-.future-deskr {
-	
-}
-
-.future-forecast {
-	
-	}
 .future-forecast-days {
 	display: flex;
 	justify-content: space-between;
@@ -211,7 +210,6 @@ input[type="text"]{
 	border-radius: 30px;
 	padding: 15px;
 	color: #343434;
-
 	box-shadow: 3px 3px 10px 1px rgba(119, 76, 254, 0.2);
 }
 .block-title {
