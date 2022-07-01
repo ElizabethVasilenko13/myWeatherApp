@@ -165,23 +165,7 @@ input[type="text"]{
 	justify-content: space-between;
 }
 
-
-.fa-cloud-rain {
-	color: #F5F5F5;
-	font-size: 130px;
-	margin-left: 10px;
-}
-.future-content {
-	display: flex;
-	flex-direction: column;
-	margin-right: 20px;
-}
-
-.future-deskr {
-	font-weight: normal;
-}
-
-.future-forecast {
+.block-forecast{
 	background: linear-gradient(127.04deg, #FF68C0 9.06%, #774CFE 97.79%);
 	display: flex;
 	justify-content: space-between;
@@ -190,6 +174,23 @@ input[type="text"]{
 	align-items: center;
 	color: #F5F5F5;
 	font-weight: 500;
+}
+.fa-cloud-rain {
+	filter: invert(99%) sepia(6%) saturate(578%) hue-rotate(235deg) brightness(114%) contrast(92%);
+	margin-left: 10px;
+}
+.future-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.future-deskr {
+	
+}
+
+.future-forecast {
+	
 	}
 .future-forecast-days {
 	display: flex;

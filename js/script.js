@@ -67,39 +67,59 @@ function getForecastDays(time){
   	
 }
 function getForecast(response){
+	console.log(response.data);
 	let forecast = response.data.daily;
 	let forecastElement = document.querySelector(".future-forecast-days");
-	console.log(response);
 	let forecastHtml = ``;
-
+	let element = document.querySelector(".future-forecast");
+	let forecastHTml = ``;
+	let currentDay = getForecastDays(response.data.daily[1].dt);
+	console.log(currentDay);
 	forecast.forEach((forecastDay, index) =>{
-	let AverageTemp = Math.round((Math.round(forecastDay.temp.max) + Math.round(forecastDay.temp.min))/2);
-		
+		console.log(forecastDay[index+1]);
+		let AverageTemp = Math.round((Math.round(forecastDay.temp.max) + Math.round(forecastDay.temp.min))/2);
 		if(index < 5){
 			forecastHtml = forecastHtml +
 			`
 			<div class="days-block">
 			<div class="block">
-			<div class="block-title">${getForecastDays(forecastDay.dt)}</div>
-				<img src="./img/${forecastDay.weather[0].icon}.svg" class="weather-icon" width="28" height="28"></img>
+				<div class="block-title">${getForecastDays(forecastDay.dt)}</div>
+					<img src="./img/${forecastDay.weather[0].icon}.svg" class="weather-icon" width="28" height="28"></img>
 				<div class="block-degrees">${AverageTemp}°</div>
 			</div>
 			</div>
 			`;
 		}
-	
+		
 	}); 
-	
 	forecastHtml = forecastHtml + `</div>`;
 	forecastElement.innerHTML = forecastHtml; 
+	
+	forecastHTml = `
+			<div class="block-forecast">
+				<img src="./img/${forecast[1].weather[0].icon}.svg" class="fa-cloud-rain" width="130" height="130"></img>
+				<div class="future-content">
+					<div class="content-weater">Tomorrow</div>
+					<div class="content-degrees">${Math.round((Math.round(forecast[1].temp.max) + Math.round(forecast[1].temp.min))/2)}°</div>
+					<div class="future-deskr">${forecast[1].weather[0].main}</div>
+				</div>
+			</div>`;
+	
+		
+	
+	forecastHTml = forecastHTml + `</div>`;
+	element.innerHTML = forecastHTml;				
+	
 }
+
 
 function getCoord(coordinats){
 	apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinats.lat}&lon=${coordinats.lon}&appid=${apiKey}&units=metric`;
+	//
 	axios.get(apiUrl).then(getForecast);
-	console.log(apiUrl);
+	//axios.get(apiUrl).then();
+	
 }
-
 
 function getWeather(response) {
 	temp.innerHTML = Math.round(response.data.main.temp);
