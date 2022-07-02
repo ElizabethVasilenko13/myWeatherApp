@@ -135,7 +135,6 @@ function getWeather(response) {
 	changeUnit(tempValue);
 	getCoord(response.data.coord);
 	iconElement.setAttribute("src",`./img/${response.data.weather[0].icon}.svg`);
-	iconElement.classList.add("dd");
 	visibility.innerHTML = (response.data.visibility/1000) + "km";
 	humiditly.innerHTML = (response.data.main.humidity) + "%";
 	windSpeed.innerHTML = (response.data.wind.speed) + "km/h";
