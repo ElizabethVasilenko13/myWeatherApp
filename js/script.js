@@ -177,5 +177,11 @@ function retrievePosition(position) {
   	axios.get(apiUrl).then(getWeather);
 }
 
+let themeBtm = document.querySelector(".theme-btn");
+themeBtm.addEventListener("click", (e) => {
+	e.preventDefault();
+	let body = document.querySelector("body");
+	body.classList.toggle("dark");
+})
 showData(new Date());
 showDefaultCityWeather();
