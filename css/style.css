@@ -1,7 +1,9 @@
 body{
 	font-family: 'IBM Plex Sans KR', sans-serif;
 	font-weight: 400;
-		
+}
+.dark{
+	background-color: #343434;
 }
 .container{
 	font-size: 18px;
@@ -10,19 +12,92 @@ body{
 	text-align: center;
 	margin: 0;
 	padding: 0;
+	
 }
-.wrapper {
+.dark .source{
+	color:#F5F5F5;
+}
+.checkbox-ios {
+	margin: 0;
+	display: inline-block;    
+	height: 28px;          
+	position: relative;
+	vertical-align: middle;
+	user-select: none;	
+	margin-top: 9px;
+	margin-left: 847px;
+	/* top: 107px;
+	left: 990px; */
+}
+.checkbox-ios .checkbox-ios-switch {
+	position: relative;	
+	display: inline-block;
+	box-sizing: border-box;			
+	width: 56px;	
+	height: 28px;
+	border: 1px solid rgba(0, 0, 0, .1);
+	border-radius: 25%/50%;	
+	vertical-align: top;
+	background: #eee;
+	transition: .2s;
+}
+.checkbox-ios .checkbox-ios-switch:before {
+	content: '';
+	position: absolute;
+	top: 1px;
+	left: 1px;	
+	display: inline-block;
+	width: 24px;	
+	height: 24px;
+	border-radius: 50%;
+	background: white;
+	transition: .15s;
+}
+.checkbox-ios input[type=checkbox] {
+	display: block;	
+	width: 0;
+	height: 0;	
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+}
+.checkbox-ios input[type=checkbox]:not(:disabled):active + .checkbox-ios-switch:before {
+	box-shadow: 3px 3px 10px 1px rgba(254, 76, 236, 0.51);
+}
+
+.checkbox-ios input[type=checkbox]:checked + .checkbox-ios-switch {
+	background: #774CFE;
+}
+
+.checkbox-ios input[type=checkbox]:checked + .checkbox-ios-switch:before {
+	transform:translateX(28px);
+}
+
+/* Focus */
+.checkbox-ios.focused .checkbox-ios-switch:before {
+	box-shadow: inset 0px 0px 4px #ff5623;
+}
+.wrap{
 	max-width: 960px;
 	background: linear-gradient(to top, #dad4ec 0%, #dad4ec 1%, #f3e7e9 100%);
 	margin: 70px auto 5px;
 	box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.15);
 	border-radius: 50px;
-	display: flex;
-	justify-content: space-between;
-	padding: 46px 47px;
 	color: #343434;
 }
+.dark .wrap{
+	color: #F5F5F5;
+	background:#252525;
+}
 
+.wrapper {
+	display: flex;
+	justify-content: space-between;
+	padding: 9px 47px 46px;
+}
+.reduce-font{
+	font-size: 16px;
+}
 .first-part {
 }
 
@@ -58,8 +133,11 @@ input[type="text"]{
 	padding: 5px 0px 5px 15px;
 	filter: drop-shadow(2px 2px 10px rgba(0, 0, 0, 0.1));
 }
+.dark input[type="text"]{
+	background:#2F2F2F;
+}
+
 .last-update{
-	font-size: 16px;
 	color: rgba(178, 179, 199, 0.74);
 	text-align: right;
 	margin-top: 5px;
@@ -88,6 +166,10 @@ input[type="text"]{
 .icons__firs-page{
 	color: #774CFE;
 }
+.city-date{
+	background-color:#dad4ec;
+	border-radius:30px;
+}
 .temperature {
 	background: linear-gradient(127.04deg, #FF68C0 9.06%, #774CFE 97.79%);
 	border-radius: 30px;
@@ -103,6 +185,7 @@ input[type="text"]{
 	text-align: center;
 	margin: 45px auto;
 }
+
 .icon-element{
 	filter: invert(99%) sepia(5%) saturate(492%) hue-rotate(209deg) brightness(112%) contrast(92%);
 	position: relative;
@@ -148,7 +231,6 @@ input[type="text"]{
 	font-size: 85px;
 }
 .bottom-data {
-	
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -161,8 +243,6 @@ input[type="text"]{
 }
 .text-sbsc{
 	color:rgba(178, 179, 199, 0.74);
-	line-height: 20px;
-	margin-top: 10px;
 }
 .second-part {
 	background: #F5F5F5;
@@ -173,7 +253,9 @@ input[type="text"]{
 	flex-direction: column;
 	justify-content: space-between;
 }
-
+.dark .second-part{
+	background:#2F2F2F;
+}
 .block-forecast{
 	background: linear-gradient(127.04deg, #FF68C0 9.06%, #774CFE 97.79%);
 	display: flex;
@@ -197,24 +279,31 @@ input[type="text"]{
 .future-forecast-days {
 	display: flex;
 	justify-content: space-between;
-	
 }
 .block{
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
+	padding: 20px;
 }
 .days-block {
 	margin: 0 5px 0 5px;
-	max-width: 60px;
+	max-width: 65px;
 	background-color:#F5F5F5;
 	border: 1px solid rgba(255, 104, 192, 0.29);
 	border-radius: 30px;
-	padding: 15px;
 	color: #343434;
-	box-shadow: 3px 3px 10px 1px rgba(119, 76, 254, 0.2);
+	box-shadow: 3px 3px 10px 1px rgba(117, 76, 254, 0.099);
 }
+.dark .days-block{
+	background:#2F2F2F;
+	color:#F5F5F5;
+}
+.min{
+	color: rgba(151, 152, 167, 0.882);
+}
+
 .block-title {
 	margin-bottom: 10px;
 }

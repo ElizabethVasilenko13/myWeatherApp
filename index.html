@@ -12,12 +12,15 @@
 	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
-<body>
+<body class="dark">
 	
 	<div class="container">
+		<div class="wrap">
+			<label class="checkbox-ios">
+				<input type="checkbox" id="checkbox-input">
+				<span class="checkbox-ios-switch"></span>
+			</label>
 		<div class="wrapper">
-				
-					
 				<div class="first-part">
 				<div class="search-query">
 					<form id="search-form">
@@ -29,7 +32,7 @@
 					
 					</form>
 				</div>
-				<div class="last-update">Your Local Time:</div>
+				<div class="last-update reduce-font">Your Local Time:</div>
 				<div class="city-day">
 					<div class="city first-icon">
 						<i class="fa-solid fa-location-dot icons__firs-page"></i>
@@ -40,9 +43,9 @@
 					</div>
 					
 				</div>
-				
+					
 				<div class="temperature ">
-				
+			
 					<div class="tempereture-content">
 						<div class="content-weater"></div>
 						<span class="content-degrees" id="degrees"></span>
@@ -61,21 +64,21 @@
 							<i class="fa-regular fa-eye icons__firs-page"></i>
 							<div class="icon-text" id="visib-id"></div>
 						</div>
-						<div class="text-sbsc">Visibility</div>
+						<div class="text-sbsc reduce-font">Visibility</div>
 					</div>
 					<div class="bottom-el">
 					<div class="first-icon">
 						<i class="fa-solid fa-droplet icons__firs-page"></i>
 						<div class="icon-text" id="humid-id"></div>
 					</div>
-					<div class="text-sbsc">Humiditly</div>
+					<div class="text-sbsc reduce-font">Humiditly</div>
 					</div>
 					<div class="bottom-el">
 					<div class="first-icon">
 						<i class="fa-solid fa-wind icons__firs-page"></i>
 						<div class="icon-text" id="wind-id"></div>
 					</div>
-					<div class="text-sbsc">Wind</div>
+					<div class="text-sbsc reduce-font">Wind</div>
 					</div>
 				</div>
 			</div>
@@ -86,6 +89,7 @@
 					<div class="future-forecast">
 					</div>
 					<div class="future-forecast-days">
+			</div>
 			</div>
 			</div>
 			</div>
