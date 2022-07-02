@@ -27,24 +27,25 @@
 				"November",
 				"December"
 	];
-
-function showData (date){
+setInterval(() => showData(), 1000);
+function showData(){
+	let date = new Date();
 	let day = date.getDay();
 	let monthDay = date.getDate();
 	let hour = date.getHours();
 	let minutes = date.getMinutes();
 	let month = date.getMonth();
-	
+	let period = "";
 	if (minutes < 10){
 		minutes = `0${minutes}`;
 	}else if (hour < 10){
 		hour = `0${hour}`;
 	}else if (hour <= 12){
-		hour = `${hour}:${minutes}am`;
+		period = `am`;
 	}else {
-		hour = `${hour}:${minutes}pm`;
+		period= `pm`;
 	}
-	dayBlock.innerHTML = `${months[month]} ${monthDay}, ${daysOfWeek[day]} ${hour}`;
+	dayBlock.innerHTML = `${months[month]} ${monthDay}, ${daysOfWeek[day]} ${hour}:${minutes}${period}`;
 }
 let apiKey ="1aab98fcee055bc5a48c36f9c5c11358";
 let unit = "metric";	
@@ -86,7 +87,6 @@ function getForecastDays(time){
 }
 
 function getForecast(response){
-	console.log(response.data);
 	let forecast = response.data.daily;
 	let forecastElement = document.querySelector(".future-forecast-days");
 	let forecastHtml = ``;
@@ -137,7 +137,6 @@ function getCoord(coordinats){
 }
 
 function getWeather(response) {
-	
 	let tempValue = Math.round(response.data.main.temp);
 	temp.innerHTML = tempValue;
 	let iconElement = document.querySelector(".icon-element");
@@ -182,6 +181,7 @@ themeBtm.addEventListener("click", (e) => {
 	e.preventDefault();
 	let body = document.querySelector("body");
 	body.classList.toggle("dark");
-})
-showData(new Date());
+});
+
+
 showDefaultCityWeather();
