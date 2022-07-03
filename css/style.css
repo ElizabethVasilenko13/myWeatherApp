@@ -268,7 +268,7 @@ input[type="text"]{
 	background: linear-gradient(127.04deg, #FF68C0 9.06%, #774CFE 97.79%);
 	display: flex;
 	justify-content: space-between;
-	padding: 20px 20px;
+	padding: 7px 20px;
 	border-radius: 30px;
 	align-items: center;
 	color: #F5F5F5;

@@ -4,7 +4,7 @@ let linkCelsius = document.querySelector("#celsius");
 let linkFahrenheit = document.querySelector("#fahrenheit");
 let unit = "metric";	
 let temp = document.querySelector(".content-degrees");
-let celciusTemperature = null;
+
 
 let daysOfWeek = [
 			"Sunday",
@@ -98,7 +98,7 @@ function getForecast(response){
 			<div class="block">
 				<div class="block-title">${getForecastDays(forecastDay.dt)}</div>
 					<img src="./img/${forecastDay.weather[0].icon}.svg" class="weather-icon" width="28" height="28"></img>
-					<span id="high-temp"class="block-degrees reduce-font">${Math.round(forecastDay.temp.max)}°/<span id="low-temp"class="block-degrees min">${Math.round(forecastDay.temp.min)}°</span></span>
+					<span id="temp" class="block-degrees">${Math.round((Math.round(forecastDay.temp.max) + Math.round(forecastDay.temp.min))/2)}°</span>
 					</div>
 			</div>`;
 		}
@@ -114,7 +114,7 @@ function getForecast(response){
 				<div class="future-content">
 					<div class="content-weater">Tomorrow</div>
 					<div class="future-deskr">${forecast[1].weather[0].main}</div>
-					<div id="tomorrow-weather"class="content-degrees">${Math.round((Math.round(forecast[1].temp.max) + Math.round(forecast[1].temp.min))/2)}°</div>
+					<div id="tomorrow-weather"class="content-degrees">${Math.round((Math.round(forecast[1].temp.max) + Math.round(forecast[1].temp.min))/2)}</div>
 					<div>
 					<span id="max-temp"class="block-degrees">Max: ${Math.round(forecast[1].temp.max)}°/</span>
 					<span id="min-temp"class="block-degrees-min">Min: ${Math.round(forecast[1].temp.min)}°</span>
@@ -134,10 +134,10 @@ function getCoord(coordinats){
 }
 
 function getWeather(response) {
-	let tempValue = Math.round(response.data.main.temp);
-	temp.innerHTML = tempValue;
+	//let tempValue = Math.round(response.data.main.temp);
+	celciusTemperature = response.data.main.temp;
+	temp.innerHTML = Math.round(celciusTemperature);
 	let iconElement = document.querySelector(".icon-element");
-	changeUnit(tempValue);
 	getCoord(response.data.coord);
 	iconElement.setAttribute("src",`./img/${response.data.weather[0].icon}.svg`);
 	document.querySelector("#visib-id").innerHTML = (response.data.visibility/1000) + "km";
@@ -145,32 +145,29 @@ function getWeather(response) {
 	document.querySelector("#wind-id").innerHTML = (response.data.wind.speed) + "km/h";
 	document.querySelector(".content-weater").innerHTML = response.data.weather[0].main;
 	cityName.innerHTML = response.data.name;
-	celciusTemperature = response.data.main.temp;
+	
 	console.log(celciusTemperature);
 }
 
+
+//change Celsius/Fahrenheit function
 function showCelsiusTemp(e){
 	e.preventDefault();
 	linkCelsius.classList.add("active");
 	linkFahrenheit.classList.remove("active");
 
 	temp.innerHTML = Math.round(celciusTemperature);
-	
 	document.querySelector("#tomorrow-weather").innerHTML = `${tomorrowTemp}°`;
 	document.querySelector("#min-temp").innerHTML = `Min: ${lowTemp}°`;
     document.querySelector("#max-temp").innerHTML = `Max: ${highTemp}°/`;
 
-	let forecastMax = document.querySelectorAll("#high-temp");
+	
+	/* let forecastMax = document.querySelectorAll("#temp");
 	forecastMax.forEach(function (item) {
-		let currentTemp = item.innerHTML;
-		//convert to Celsius
-		item.innerHTML= Math.round(((currentTemp - 32)* 5) / 9);
-	});
-	let forecastMin= document.querySelectorAll("#low-temp");
-	forecastMin.forEach(function (item) {
- 		let currentTemp= item.innerHTML;
-  		item.innerHTML= Math.round(((currentTemp - 32)* 5) /9);
-	});
+		let tempe = item.innerHTML;
+		console.log(tempe);
+		item.innerHTML= `${Math.round(((tempe - 32)* 5) / 9)}`;
+	}); */
 	linkCelsius.removeEventListener("click", showCelsiusTemp);
   	linkFahrenheit.addEventListener("click", showFahrenheitTemp);
 }
@@ -183,25 +180,19 @@ function showFahrenheitTemp(e){
 
 	document.querySelector("#tomorrow-weather").innerHTML = `${Math.round((tomorrowTemp * 9)/ 5 + 32)}°`;
 	document.querySelector("#min-temp").innerHTML = `Min: ${Math.round((lowTemp * 9) / 5 + 32)}°`;
-    document.querySelector("#max-temp").innerHTML =  `Max: ${Math.round((highTemp * 9) / 5 + 32)}°/`;
+    document.querySelector("#max-temp").innerHTML = `Max: ${Math.round((highTemp * 9) / 5 + 32)}°/`;
 
-	let forecastMax = document.querySelectorAll("#high-temp");
-	forecastMax.forEach(function (item) {
-		let currentTemp = item.innerHTML;
-		//convert to Celsius
-		item.innerHTML= Math.round((currentTemp * 9) /5 + 32);
-	});
-
-	let forecastMin= document.querySelectorAll("#low-temp");
-	forecastMin.forEach(function (item) {
- 		let currentTemp= item.innerHTML;
-  		item.innerHTML= Math.round((currentTemp * 9) /5 + 32);
-	});
+	/* let forecastAv = document.querySelectorAll("#temp");
+	forecastAv.forEach(function (item) {
+		let tempe = item.innerHTML;
+		console.log(tempe);
+		item.innerHTML= `${Math.round((tempe * 9) /5 + 32)}`;
+	}); */
 	linkCelsius.addEventListener("click", showCelsiusTemp);
   	linkFahrenheit.removeEventListener("click", showFahrenheitTemp);
 }
 
-
+let celciusTemperature = null;
 linkCelsius.addEventListener("click", showCelsiusTemp);
 
 linkFahrenheit.addEventListener("click", showFahrenheitTemp);
