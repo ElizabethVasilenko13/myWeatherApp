@@ -4,7 +4,7 @@ let linkCelsius = document.querySelector("#celsius");
 let linkFahrenheit = document.querySelector("#fahrenheit");
 let unit = "metric";	
 let temp = document.querySelector(".content-degrees");
-
+let celciusTemperature = null;
 
 let daysOfWeek = [
 			"Sunday",
@@ -98,7 +98,7 @@ function getForecast(response){
 			<div class="block">
 				<div class="block-title">${getForecastDays(forecastDay.dt)}</div>
 					<img src="./img/${forecastDay.weather[0].icon}.svg" class="weather-icon" width="28" height="28"></img>
-					<span class="block-degrees reduce-font">${Math.round(forecastDay.temp.max)}°/<span class="block-degrees min">${Math.round(forecastDay.temp.min)}°</span></span>
+					<span id="high-temp"class="block-degrees reduce-font">${Math.round(forecastDay.temp.max)}°/<span id="low-temp"class="block-degrees min">${Math.round(forecastDay.temp.min)}°</span></span>
 					</div>
 			</div>`;
 		}
@@ -113,12 +113,19 @@ function getForecast(response){
 				<img src="./img/${forecast[1].weather[0].icon}.svg" class="fa-cloud-rain" width="130" height="130"></img>
 				<div class="future-content">
 					<div class="content-weater">Tomorrow</div>
-					<div class="content-degrees">${Math.round((Math.round(forecast[1].temp.max) + Math.round(forecast[1].temp.min))/2)}°</div>
 					<div class="future-deskr">${forecast[1].weather[0].main}</div>
+					<div id="tomorrow-weather"class="content-degrees">${Math.round((Math.round(forecast[1].temp.max) + Math.round(forecast[1].temp.min))/2)}°</div>
+					<div>
+					<span id="max-temp"class="block-degrees">Max: ${Math.round(forecast[1].temp.max)}°/</span>
+					<span id="min-temp"class="block-degrees-min">Min: ${Math.round(forecast[1].temp.min)}°</span>
+					</div>
 				</div>
 			</div>`;
 	forecastHTml = forecastHTml + `</div>`;
-	element.innerHTML = forecastHTml;				
+	element.innerHTML = forecastHTml;		
+	lowTemp = Math.round(forecast[1].temp.min);
+  	highTemp = Math.round(forecast[1].temp.max);	
+	tomorrowTemp = Math.round((Math.round(forecast[1].temp.max) + Math.round(forecast[1].temp.min))/2);
 }
 
 function getCoord(coordinats){
@@ -138,26 +145,68 @@ function getWeather(response) {
 	document.querySelector("#wind-id").innerHTML = (response.data.wind.speed) + "km/h";
 	document.querySelector(".content-weater").innerHTML = response.data.weather[0].main;
 	cityName.innerHTML = response.data.name;
+	celciusTemperature = response.data.main.temp;
+	console.log(celciusTemperature);
 }
 
-//change Celsius/Fahrenheit function
-function changeUnit (temperature) {
-	
-		linkCelsius.addEventListener("click", (e) => {
-			e.preventDefault();
-			linkCelsius.classList.add("active");
-			linkFahrenheit.classList.remove("active");
-			temp.innerHTML = temperature;
-		});
+function showCelsiusTemp(e){
+	e.preventDefault();
+	linkCelsius.classList.add("active");
+	linkFahrenheit.classList.remove("active");
 
-		linkFahrenheit.addEventListener("click", (e) => {
-			e.preventDefault();
-			linkFahrenheit.classList.add("active");
-			linkCelsius.classList.remove("active");
-			temp.innerHTML = Math.round((temperature * 9) / 5 + 32);
-		});
-	}
+	temp.innerHTML = Math.round(celciusTemperature);
 	
+	document.querySelector("#tomorrow-weather").innerHTML = `${tomorrowTemp}°`;
+	document.querySelector("#min-temp").innerHTML = `Min: ${lowTemp}°`;
+    document.querySelector("#max-temp").innerHTML = `Max: ${highTemp}°/`;
+
+	let forecastMax = document.querySelectorAll("#high-temp");
+	forecastMax.forEach(function (item) {
+		let currentTemp = item.innerHTML;
+		//convert to Celsius
+		item.innerHTML= Math.round(((currentTemp - 32)* 5) / 9);
+	});
+	let forecastMin= document.querySelectorAll("#low-temp");
+	forecastMin.forEach(function (item) {
+ 		let currentTemp= item.innerHTML;
+  		item.innerHTML= Math.round(((currentTemp - 32)* 5) /9);
+	});
+	linkCelsius.removeEventListener("click", showCelsiusTemp);
+  	linkFahrenheit.addEventListener("click", showFahrenheitTemp);
+}
+
+function showFahrenheitTemp(e){
+	e.preventDefault();
+	linkCelsius.classList.remove("active");
+	linkFahrenheit.classList.add("active");
+	temp.innerHTML = Math.round(((celciusTemperature * 9) / 5 + 32));
+
+	document.querySelector("#tomorrow-weather").innerHTML = `${Math.round((tomorrowTemp * 9)/ 5 + 32)}°`;
+	document.querySelector("#min-temp").innerHTML = `Min: ${Math.round((lowTemp * 9) / 5 + 32)}°`;
+    document.querySelector("#max-temp").innerHTML =  `Max: ${Math.round((highTemp * 9) / 5 + 32)}°/`;
+
+	let forecastMax = document.querySelectorAll("#high-temp");
+	forecastMax.forEach(function (item) {
+		let currentTemp = item.innerHTML;
+		//convert to Celsius
+		item.innerHTML= Math.round((currentTemp * 9) /5 + 32);
+	});
+
+	let forecastMin= document.querySelectorAll("#low-temp");
+	forecastMin.forEach(function (item) {
+ 		let currentTemp= item.innerHTML;
+  		item.innerHTML= Math.round((currentTemp * 9) /5 + 32);
+	});
+	linkCelsius.addEventListener("click", showCelsiusTemp);
+  	linkFahrenheit.removeEventListener("click", showFahrenheitTemp);
+}
+
+
+linkCelsius.addEventListener("click", showCelsiusTemp);
+
+linkFahrenheit.addEventListener("click", showFahrenheitTemp);
+
+
 function retrievePosition(position) {
 	let lat = position.coords.latitude;
 	let lon = position.coords.longitude;

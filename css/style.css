@@ -47,7 +47,7 @@ body{
   width: 65px; /* ширина */
   height: 29px; /* высота */
   border-radius: 19px; /* радиус скругления */
-  background: #bfbfbf; /* цвет фона */
+  background: #bfbfbfc6; /* цвет фона */
   z-index: 0;
  
   padding: 0;
