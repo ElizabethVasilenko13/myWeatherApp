@@ -55,7 +55,6 @@ function showData(){
 
 function showDefaultCityWeather(){
 	let cityElement = document.getElementById("default-city").textContent;
-	console.log(cityElement);
 	let defaultApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityElement}&appid=${apiKey}&units=${unit}`;
 	axios.get(defaultApiUrl).then(getWeather);
 }
@@ -167,8 +166,9 @@ function retrievePosition(position) {
 }
 
 //theme-switcher
-document.querySelector(".theme-btn").addEventListener("click", (e) => {
+document.querySelector(".switch-btn").addEventListener("click", (e) => {
 	e.preventDefault();
+	document.querySelector(".switch-btn").classList.toggle("switch-on");
 	document.querySelector("body").classList.toggle("dark");
 	document.querySelector("body").classList.toggle("light");
 });

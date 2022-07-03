@@ -34,24 +34,38 @@ body{
 .container{
 	font-size: 18px;
 }
+.switch-btn {
+  width: 65px; /* ширина */
+  height: 29px; /* высота */
+  border-radius: 19px; /* радиус скругления */
+  background: #bfbfbf; /* цвет фона */
+  z-index: 0;
+  margin-left: 820px;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition-duration: 300ms; /* анимация */
+}
+.switch-btn::after {
+  content: "";
+  height: 25px; /* высота кнопки */
+  width: 25px; /* ширина кнопки */
+  border-radius: 17px;
+  background: #fff; /* цвет кнопки */
+  top: 2px; /* положение кнопки по вертикали относительно основы */
+  left: 2px; /* положение кнопки по горизонтали относительно основы */
+  transition-duration: 300ms; /* анимация */
+  position: absolute;
+  z-index: 1;
+}
+.switch-on {
+  background: #774CFE;
+}
+.switch-on::after {
+  left: 38px;
+}
 
-.theme-btn {	
-	margin-left: 795px;
-	max-width: 120px;
-    color: #F5F5F5;
-    background: #774CFE;
-    height: 36px;
-    border: none;
-    border-radius: 30px;
-    padding: 0px 10px;
-	display: flex;
-    align-items: center;
-	justify-content: center;
-}
-.theme-btn:hover{
-	background: #5f3ecb;
-	filter: drop-shadow(2px 2px 10px rgba(0, 0, 0, 0.1));
-}
 .wrap{
 	padding-top: 9px;
 	max-width: 960px;
