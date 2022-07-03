@@ -34,13 +34,22 @@ body{
 .container{
 	font-size: 18px;
 }
+.theme-sw{
+	margin-left: 708px;
+	display: flex;
+	align-items: center;
+}
+.theme-sw-text{
+	margin-right: 5px;
+	color: rgba(178, 179, 199, 0.74);
+}
 .switch-btn {
   width: 65px; /* ширина */
   height: 29px; /* высота */
   border-radius: 19px; /* радиус скругления */
   background: #bfbfbf; /* цвет фона */
   z-index: 0;
-  margin-left: 820px;
+ 
   padding: 0;
   border: none;
   cursor: pointer;
