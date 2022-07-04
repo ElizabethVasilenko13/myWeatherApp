@@ -30,9 +30,9 @@ let months = [
 			"December"
 ];
 
-setInterval(() => showData(), 1000);
-function showData(){
-	let date = new Date();
+//setInterval(() => showData(), 1000);
+function showData(date){
+	//let date = new Date();
 	let day = date.getDay();
 	let monthDay = date.getDate();
 	let hour = date.getHours();
@@ -51,8 +51,11 @@ function showData(){
 	}
 	//inject day-info into HTML
 	document.querySelector(".day").innerHTML = `${months[month]} ${monthDay}, ${daysOfWeek[day]} ${hour}:${minutes}${period}`;
+	if (hour >= 20){
+		switchTheme();
+	} 
 }
-
+showData(new Date());
 function showDefaultCityWeather(){
 	let cityElement = document.getElementById("default-city").textContent;
 	let defaultApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityElement}&appid=${apiKey}&units=${unit}`;
@@ -117,7 +120,7 @@ function getForecast(response){
 					<div id="tomorrow-weather"class="content-degrees">${Math.round((Math.round(forecast[1].temp.max) + Math.round(forecast[1].temp.min))/2)}</div>
 					<div>
 					<span id="max-temp"class="block-degrees">Max: ${Math.round(forecast[1].temp.max)}°/</span>
-					<span id="min-temp"class="block-degrees-min">Min: ${Math.round(forecast[1].temp.min)}°</span>
+					<span id="min-temp"class="block-degrees">Min: ${Math.round(forecast[1].temp.min)}°</span>
 					</div>
 				</div>
 			</div>`;
@@ -206,11 +209,11 @@ function retrievePosition(position) {
 }
 
 //theme-switcher
-document.querySelector(".switch-btn").addEventListener("click", (e) => {
-	e.preventDefault();
+function switchTheme(e){
 	document.querySelector(".switch-btn").classList.toggle("switch-on");
 	document.querySelector("body").classList.toggle("dark");
 	document.querySelector("body").classList.toggle("light");
-});
+}
+document.querySelector(".switch-btn").addEventListener("click", switchTheme);
 
 showDefaultCityWeather();

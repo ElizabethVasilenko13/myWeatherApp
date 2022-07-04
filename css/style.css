@@ -263,7 +263,9 @@ input[type="text"]{
 	flex-direction: column;
 	justify-content: space-between;
 }
-
+.block-degrees{
+	font-weight: normal;
+}
 .block-forecast{
 	background: linear-gradient(127.04deg, #FF68C0 9.06%, #774CFE 97.79%);
 	display: flex;
@@ -325,3 +327,4 @@ input[type="text"]{
 	margin: 0;
 	padding: 0;
 }
+
