@@ -135,7 +135,7 @@ function getForecast(response){
 				<div class="future-content">
 					<div class="content-weater">Tomorrow</div>
 					<div class="future-deskr">${forecast[1].weather[0].main}</div>
-					<div id="tomorrow-weather"class="content-degrees">${Math.round((Math.round(forecast[1].temp.max) + Math.round(forecast[1].temp.min))/2)}</div>
+					<div id="tomorrow-weather"class="content-degrees">${Math.round((Math.round(forecast[1].temp.max) + Math.round(forecast[1].temp.min))/2)}°</div>
 					<div>
 					<span id="max-temp"class="block-degrees">Max: ${Math.round(forecast[1].temp.max)}°/</span>
 					<span id="min-temp"class="block-degrees">Min: ${Math.round(forecast[1].temp.min)}°</span>
