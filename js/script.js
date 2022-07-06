@@ -2,7 +2,8 @@ let apiKey ="1aab98fcee055bc5a48c36f9c5c11358";
 let cityName = document.querySelector(".icon-text");
 let linkCelsius = document.querySelector("#celsius");
 let linkFahrenheit = document.querySelector("#fahrenheit");
-let unit = "metric";	
+let unitC = "metric";
+let unitF = "imperial";
 let temp = document.querySelector(".content-degrees");
 
 
@@ -58,14 +59,14 @@ function showData(date){
 showData(new Date());
 function showDefaultCityWeather(){
 	let cityElement = document.getElementById("default-city").textContent;
-	let defaultApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityElement}&appid=${apiKey}&units=${unit}`;
+	let defaultApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityElement}&appid=${apiKey}&units=${unitC}`;
 	axios.get(defaultApiUrl).then(getWeather);
 }
 
 //EventListener for location form
 document.querySelector("#search-form").addEventListener("submit", (e) => {
 	let input = document.querySelector("#search-input");
-	let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${input.value}&appid=${apiKey}&units=${unit}`;
+	let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${input.value}&appid=${apiKey}&units=${unitC}`;
 	e.preventDefault();
 	axios.get(apiUrl).then(getWeather);
 	if(input.value) {
@@ -104,9 +105,26 @@ function getForecast(response){
 					<span id="temp" class="block-degrees">${Math.round((Math.round(forecastDay.temp.max) + Math.round(forecastDay.temp.min))/2)}°</span>
 					</div>
 			</div>`;
+			
+				
+			
 		}
+		/* temp = Math.round((Math.round(forecast[index].temp.max) + Math.round(forecast[index].temp.min))/2);
+		return temp  (index < 5); */ 
 	}); 
-
+/* 	forecast.forEach(getTemp);
+	function getTemp(el, index){
+		if(index < 5){
+			 temp = Math.round((Math.round(forecast[index].temp.max) + Math.round(forecast[index].temp.min))/2);
+			return temp;
+		}
+	} */
+	temp1 = Math.round((Math.round(forecast[0].temp.max) + Math.round(forecast[0].temp.min))/2);
+	temp2 = Math.round((Math.round(forecast[1].temp.max) + Math.round(forecast[1].temp.min))/2);
+	temp3 = Math.round((Math.round(forecast[2].temp.max) + Math.round(forecast[2].temp.min))/2);
+	temp4 = Math.round((Math.round(forecast[3].temp.max) + Math.round(forecast[3].temp.min))/2);
+	temp5 = Math.round((Math.round(forecast[4].temp.max) + Math.round(forecast[4].temp.min))/2);
+	
 	console.log(forecast);
 	forecastHtml = forecastHtml + `</div>`;
 	forecastElement.innerHTML = forecastHtml; 
@@ -136,20 +154,51 @@ function getCoord(coordinats){
 	axios.get(apiUrl).then(getForecast);
 }
 
+// function getFahrenheitTemp(response){
+// 	let forecast = response.data.daily;
+// 	console.log(forecast);
+
+// 	let forecastElement = document.querySelector(".future-forecast-days");
+// 	let forecastHtml = ``;
+// 	forecast.forEach((forecastDay, index) => {
+// 		if(index < 5){
+// 			let average = Math.round((Math.round(forecastDay.temp.max) + Math.round(forecastDay.temp.min))/2);
+// 			console.log(average);
+
+// 			forecastHtml = forecastHtml +
+// 			`
+// 			<div class="days-block">
+// 			<div class="block">
+// 				<div class="block-title">${getForecastDays(forecastDay.dt)}</div>
+// 					<img src="./img/${forecastDay.weather[0].icon}.svg" class="weather-icon" width="28" height="28"></img>
+// 					<span id="temp" class="block-degrees">${average}°</span>
+// 					</div>
+// 			</div>`;
+// 		}
+// 	}); 
+
+// 	//console.log(forecast);
+// 	forecastHtml = forecastHtml + `</div>`;
+// 	forecastElement.innerHTML = forecastHtml; 
+// }
+/* function getFahrenheit(coordinats){
+	apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinats.lat}&lon=${coordinats.lon}&appid=${apiKey}&units=${unitF}`;
+	console.log(apiUrl);
+	axios.get(apiUrl).then(getFahrenheitTemp);
+} */
 function getWeather(response) {
 	//let tempValue = Math.round(response.data.main.temp);
 	celciusTemperature = response.data.main.temp;
 	temp.innerHTML = Math.round(celciusTemperature);
 	let iconElement = document.querySelector(".icon-element");
 	getCoord(response.data.coord);
+	//getFahrenheit(response.data.coord);
 	iconElement.setAttribute("src",`./img/${response.data.weather[0].icon}.svg`);
 	document.querySelector("#visib-id").innerHTML = (response.data.visibility/1000) + "km";
 	document.querySelector("#humid-id").innerHTML = (response.data.main.humidity) + "%";
 	document.querySelector("#wind-id").innerHTML = (response.data.wind.speed) + "km/h";
 	document.querySelector(".content-weater").innerHTML = response.data.weather[0].main;
 	cityName.innerHTML = response.data.name;
-	
-	console.log(celciusTemperature);
 }
 
 
@@ -165,12 +214,15 @@ function showCelsiusTemp(e){
     document.querySelector("#max-temp").innerHTML = `Max: ${highTemp}°/`;
 
 	
-	/* let forecastMax = document.querySelectorAll("#temp");
-	forecastMax.forEach(function (item) {
-		let tempe = item.innerHTML;
-		console.log(tempe);
-		item.innerHTML= `${Math.round(((tempe - 32)* 5) / 9)}`;
-	}); */
+	let forecastMax = document.querySelectorAll("#temp");
+	// forecastMax.forEach((el, index) => {
+	// 	el[index].innerHTML = temp;
+	// });
+	forecastMax[0].innerHTML = temp1 + "°";
+	forecastMax[1].innerHTML = temp2+ "°";
+	forecastMax[2].innerHTML = temp3+ "°";
+	forecastMax[3].innerHTML = temp4+ "°";
+	forecastMax[4].innerHTML = temp5+ "°";
 	linkCelsius.removeEventListener("click", showCelsiusTemp);
   	linkFahrenheit.addEventListener("click", showFahrenheitTemp);
 }
@@ -184,13 +236,14 @@ function showFahrenheitTemp(e){
 	document.querySelector("#tomorrow-weather").innerHTML = `${Math.round((tomorrowTemp * 9)/ 5 + 32)}°`;
 	document.querySelector("#min-temp").innerHTML = `Min: ${Math.round((lowTemp * 9) / 5 + 32)}°`;
     document.querySelector("#max-temp").innerHTML = `Max: ${Math.round((highTemp * 9) / 5 + 32)}°/`;
-
-	/* let forecastAv = document.querySelectorAll("#temp");
-	forecastAv.forEach(function (item) {
-		let tempe = item.innerHTML;
-		console.log(tempe);
-		item.innerHTML= `${Math.round((tempe * 9) /5 + 32)}`;
-	}); */
+	//getFahrenheitTemp();
+	let forecastAv = document.querySelectorAll("#temp");
+	forecastAv[0].innerHTML = Math.round((temp1 * 9) / 5 + 32)+ "°";
+	forecastAv[1].innerHTML = Math.round((temp2 * 9) / 5 + 32)+ "°";
+	forecastAv[2].innerHTML = Math.round((temp3 * 9) / 5 + 32)+ "°";
+	forecastAv[3].innerHTML = Math.round((temp5 * 9) / 5 + 32)+ "°";
+	forecastAv[4].innerHTML = Math.round((temp5 * 9) / 5 + 32)+ "°";
+	
 	linkCelsius.addEventListener("click", showCelsiusTemp);
   	linkFahrenheit.removeEventListener("click", showFahrenheitTemp);
 }
