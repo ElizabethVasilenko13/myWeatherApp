@@ -6,33 +6,32 @@ let unitC = "metric";
 let unitF = "imperial";
 let temp = document.querySelector(".content-degrees");
 
-
 let daysOfWeek = [
-			"Sunday",
-			"Monday",
-			"Tuesday",
-			"Wednesday",
-			"Thursday",
-			"Friday",
-			"Saturday"
-		];
+	"Sunday",
+	"Monday",
+	"Tuesday",
+	"Wednesday",
+	"Thursday",
+	"Friday",
+	"Saturday"
+];
 let months = [
-			"January",
-			"February",
-			"March",
-			"April",
-			"May",
-			"June",
-			"July",
-			"August",
-			"September",
-			"October",
-			"November",
-			"December"
+	"January",
+	"February",
+	"March",
+	"April",
+	"May",
+	"June",
+	"July",
+	"August",
+	"September",
+	"October",
+	"November",
+	"December"
 ];
 
 //setInterval(() => showData(), 1000);
-function showData(date){
+function showData(date) {
 	//let date = new Date();
 	let day = date.getDay();
 	let monthDay = date.getDate();
@@ -41,13 +40,13 @@ function showData(date){
 	let month = date.getMonth();
 	let period = "";
 
-	if (minutes < 10){
+	if (minutes < 10) {
 		minutes = `0${minutes}`;
-	}else if (hour < 10){
+	} else if (hour < 10) {
 		hour = `0${hour}`;
-	}else if (hour <= 12){
+	} else if (hour <= 12) {
 		period = `am`;
-	}else {
+	} else {
 		period= `pm`;
 	}
 	//inject day-info into HTML
@@ -57,7 +56,7 @@ function showData(date){
 	} 
 }
 showData(new Date());
-function showDefaultCityWeather(){
+function showDefaultCityWeather() {
 	let cityElement = document.getElementById("default-city").textContent;
 	let defaultApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityElement}&appid=${apiKey}&units=${unitC}`;
 	axios.get(defaultApiUrl).then(getWeather);
@@ -83,7 +82,7 @@ document.querySelector("#btn-current").addEventListener("click", e => {
 function getForecastDays(time){
 	let date = new Date(time * 1000);
 	let day = date.getDay();
-  	let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+	let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 	return days[day];
 }
 
@@ -97,28 +96,24 @@ function getForecast(response){
 	forecast.forEach((forecastDay, index) => {
 		if(index < 5){
 			forecastHtml = forecastHtml +
-			`
-			<div class="days-block">
-			<div class="block">
-				<div class="block-title">${getForecastDays(forecastDay.dt)}</div>
+			`<div class="days-block">
+				<div class="block">
+					<div class="block-title">${getForecastDays(forecastDay.dt)}</div>
 					<img src="./img/${forecastDay.weather[0].icon}.svg" class="weather-icon" width="28" height="28"></img>
 					<span id="temp" class="block-degrees">${Math.round((Math.round(forecastDay.temp.max) + Math.round(forecastDay.temp.min))/2)}°</span>
-					</div>
+				</div>
 			</div>`;
-			
-				
-			
 		}
 		/* temp = Math.round((Math.round(forecast[index].temp.max) + Math.round(forecast[index].temp.min))/2);
 		return temp  (index < 5); */ 
 	}); 
-/* 	forecast.forEach(getTemp);
-	function getTemp(el, index){
-		if(index < 5){
-			 temp = Math.round((Math.round(forecast[index].temp.max) + Math.round(forecast[index].temp.min))/2);
-			return temp;
-		}
-	} */
+	/* 	forecast.forEach(getTemp);
+		function getTemp(el, index){
+			if(index < 5){
+				temp = Math.round((Math.round(forecast[index].temp.max) + Math.round(forecast[index].temp.min))/2);
+				return temp;
+			}
+		} */
 	temp1 = Math.round((Math.round(forecast[0].temp.max) + Math.round(forecast[0].temp.min))/2);
 	temp2 = Math.round((Math.round(forecast[1].temp.max) + Math.round(forecast[1].temp.min))/2);
 	temp3 = Math.round((Math.round(forecast[2].temp.max) + Math.round(forecast[2].temp.min))/2);
@@ -154,38 +149,6 @@ function getCoord(coordinats){
 	axios.get(apiUrl).then(getForecast);
 }
 
-// function getFahrenheitTemp(response){
-// 	let forecast = response.data.daily;
-// 	console.log(forecast);
-
-// 	let forecastElement = document.querySelector(".future-forecast-days");
-// 	let forecastHtml = ``;
-// 	forecast.forEach((forecastDay, index) => {
-// 		if(index < 5){
-// 			let average = Math.round((Math.round(forecastDay.temp.max) + Math.round(forecastDay.temp.min))/2);
-// 			console.log(average);
-
-// 			forecastHtml = forecastHtml +
-// 			`
-// 			<div class="days-block">
-// 			<div class="block">
-// 				<div class="block-title">${getForecastDays(forecastDay.dt)}</div>
-// 					<img src="./img/${forecastDay.weather[0].icon}.svg" class="weather-icon" width="28" height="28"></img>
-// 					<span id="temp" class="block-degrees">${average}°</span>
-// 					</div>
-// 			</div>`;
-// 		}
-// 	}); 
-
-// 	//console.log(forecast);
-// 	forecastHtml = forecastHtml + `</div>`;
-// 	forecastElement.innerHTML = forecastHtml; 
-// }
-/* function getFahrenheit(coordinats){
-	apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinats.lat}&lon=${coordinats.lon}&appid=${apiKey}&units=${unitF}`;
-	console.log(apiUrl);
-	axios.get(apiUrl).then(getFahrenheitTemp);
-} */
 function getWeather(response) {
 	//let tempValue = Math.round(response.data.main.temp);
 	celciusTemperature = response.data.main.temp;
@@ -200,7 +163,6 @@ function getWeather(response) {
 	document.querySelector(".content-weater").innerHTML = response.data.weather[0].main;
 	cityName.innerHTML = response.data.name;
 }
-
 
 //change Celsius/Fahrenheit function
 function showCelsiusTemp(e){
@@ -219,11 +181,11 @@ function showCelsiusTemp(e){
 	// 	el[index].innerHTML = temp;
 	// });
 	forecastMax[0].innerHTML = temp1 + "°";
-	forecastMax[1].innerHTML = temp2+ "°";
-	forecastMax[2].innerHTML = temp3+ "°";
-	forecastMax[3].innerHTML = temp4+ "°";
-	forecastMax[4].innerHTML = temp5+ "°";
-	linkCelsius.removeEventListener("click", showCelsiusTemp);
+	forecastMax[1].innerHTML = temp2 + "°";
+	forecastMax[2].innerHTML = temp3 + "°";
+	forecastMax[3].innerHTML = temp4 + "°";
+	forecastMax[4].innerHTML = temp5 + "°";
+	linkCelsius.removeEventListener("click", getForecast);
   	linkFahrenheit.addEventListener("click", showFahrenheitTemp);
 }
 
@@ -244,7 +206,7 @@ function showFahrenheitTemp(e){
 	forecastAv[3].innerHTML = Math.round((temp5 * 9) / 5 + 32)+ "°";
 	forecastAv[4].innerHTML = Math.round((temp5 * 9) / 5 + 32)+ "°";
 	
-	linkCelsius.addEventListener("click", showCelsiusTemp);
+	linkCelsius.addEventListener("click", getForecast);
   	linkFahrenheit.removeEventListener("click", showFahrenheitTemp);
 }
 
@@ -252,7 +214,6 @@ let celciusTemperature = null;
 linkCelsius.addEventListener("click", showCelsiusTemp);
 
 linkFahrenheit.addEventListener("click", showFahrenheitTemp);
-
 
 function retrievePosition(position) {
 	let lat = position.coords.latitude;
