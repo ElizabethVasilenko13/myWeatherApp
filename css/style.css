@@ -44,35 +44,34 @@ body{
 	color: rgba(178, 179, 199, 0.74);
 }
 .switch-btn {
-  width: 65px; /* ширина */
-  height: 29px; /* высота */
-  border-radius: 19px; /* радиус скругления */
-  background: #bfbfbfc6; /* цвет фона */
-  z-index: 0;
- 
-  padding: 0;
-  border: none;
-  cursor: pointer;
-  position: relative;
-  transition-duration: 300ms; /* анимация */
+	width: 65px; 
+	height: 29px; 
+	border-radius: 19px; 
+	background: #bfbfbfc6; 
+	z-index: 0;
+	padding: 0;
+	border: none;
+	cursor: pointer;
+	position: relative;
+	transition-duration: 300ms; 
 }
 .switch-btn::after {
-  content: "";
-  height: 25px; /* высота кнопки */
-  width: 25px; /* ширина кнопки */
-  border-radius: 17px;
-  background: #fff; /* цвет кнопки */
-  top: 2px; /* положение кнопки по вертикали относительно основы */
-  left: 2px; /* положение кнопки по горизонтали относительно основы */
-  transition-duration: 300ms; /* анимация */
-  position: absolute;
-  z-index: 1;
+	content: "";
+	height: 25px; 
+	width: 25px; 
+	border-radius: 17px;
+	background: #fff; 
+	top: 2px; 
+	left: 2px; 
+	transition-duration: 300ms; 
+	position: absolute;
+	z-index: 1;
 }
 .switch-on {
-  background: #774CFE;
+	background: #774CFE;
 }
 .switch-on::after {
-  left: 38px;
+	left: 38px;
 }
 
 .wrap{
@@ -327,4 +326,11 @@ input[type="text"]{
 	margin: 0;
 	padding: 0;
 }
-
+@media  (max-width: 1000px){
+	.wrapper {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		padding: 9px 47px 46px;
+}
+}
