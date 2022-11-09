@@ -234,6 +234,7 @@ input[type="text"]{
 	display: block;
 	line-height: 90px;
 	font-size: 85px;
+	padding-right: 20px;
 }
 
 .bottom-data {
